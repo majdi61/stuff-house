@@ -88,4 +88,10 @@ public class UserResource {
         log.debug("REST request to get User : {}", login);
         return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
     }
+    @GetMapping("/ping")
+    public String pingTest() {
+        log.debug("Ping received.");
+        return "Ping! :D";
+    }
+
 }
