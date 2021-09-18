@@ -1,5 +1,6 @@
 package com.stuffhouse.myapp.service;
 
+import com.stuffhouse.myapp.domain.Article;
 import com.stuffhouse.myapp.domain.Stock;
 import com.stuffhouse.myapp.repository.StockRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,23 @@ public class StockService {
     public Stock insertStockData(Stock Stock) {
         return stockRepository.insert(Stock);
     }
+
+    public Stock updateStock(Article aricle ,long quantity,String op) {
+        Stock oldStock= stockRepository.findStockByArticle(aricle);
+
+        switch (op){
+            case "+":   oldStock.setQuantity(oldStock.getQuantity()+quantity);
+            break;
+            case "-":  oldStock.setQuantity(oldStock.getQuantity()-quantity);
+            break;
+
+
+        }
+
+        return stockRepository.save(oldStock);
+    }
+
+
 
     public Collection<Stock> getAllStockInformation() {
         return stockRepository.findAll();

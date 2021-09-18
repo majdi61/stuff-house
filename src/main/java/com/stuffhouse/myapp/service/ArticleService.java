@@ -1,7 +1,6 @@
 package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Article;
-
 import com.stuffhouse.myapp.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class ArticleService {
     }
 
     public Article insertArticleData(Article article) {
-        return articleRepository.insert(article);
+        return articleRepository.save(article);
     }
 
     public Collection<Article> getAllArticleInformation() {
@@ -32,7 +31,7 @@ public class ArticleService {
 
     public void deleteArticleUsingId(String id) {
         try {
-       articleRepository.deleteById(id);
+            articleRepository.deleteById(id);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }

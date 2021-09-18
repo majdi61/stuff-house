@@ -18,7 +18,7 @@ public class PersonService {
     }
 
     public Person insertPersonData(Person person) {
-        return personRepository.insert(person);
+        return personRepository.save(person);
     }
 
     public Collection<Person> getAllPersonInformation() {

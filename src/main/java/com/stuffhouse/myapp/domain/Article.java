@@ -19,7 +19,6 @@ public class Article {
     private String id;
     private String name;
     private double prix;
-    private long quantity;
     private String type;
 
 

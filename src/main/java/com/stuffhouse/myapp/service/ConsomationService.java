@@ -1,8 +1,8 @@
 package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Consomation;
+import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
-import com.stuffhouse.myapp.repository.StockRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,16 +13,32 @@ import java.util.Optional;
 public class ConsomationService {
 
     private final ConsomationRepository consomationRepository;
-    private final StockRepository stockRepository;
+    private final StockService stockService;
+    private final CaisseService caisseService;
+    private final PersonService personService;
 
-    public ConsomationService(ConsomationRepository consomationRepository, StockRepository stockRepository) {
+
+    public ConsomationService(ConsomationRepository consomationRepository, StockService stockService, CaisseService caisseService, PersonService personService) {
         this.consomationRepository = consomationRepository;
-        this.stockRepository = stockRepository;
+        this.stockService = stockService;
+
+        this.caisseService = caisseService;
+        this.personService = personService;
     }
 
 
     public Consomation insertConsomationData(Consomation consomation) {
 
+        stockService.updateStock(consomation.getArticle(), consomation.getQuantity(), "-");
+        if (consomation.getPaid()) {
+            caisseService.updateCaisseUsingId("azeaze", consomation.getValueToPay(), "+");
+
+
+        } else {
+            Person person = consomation.getPerson();
+            person.setCredit(person.getCredit() + consomation.getValueToPay());
+            personService.insertPersonData(person);
+        }
 
 
         return consomationRepository.insert(consomation);

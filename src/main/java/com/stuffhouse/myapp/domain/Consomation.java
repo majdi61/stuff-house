@@ -25,6 +25,9 @@ public class Consomation {
     @DBRef
     private Article article;
 
+    private long quantity;
+
+    private double valueToPay;
     private Boolean paid;
 
 
