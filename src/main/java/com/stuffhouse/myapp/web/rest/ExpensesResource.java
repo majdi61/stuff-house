@@ -36,6 +36,10 @@ public class ExpensesResource {
         return expensesService.getExpensesInformationById(id);
     }
 
+    @GetMapping("/allexpenses")
+    public long getStockCountByType() {
+        return expensesService.getExpensesCount();
+    }
 
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {

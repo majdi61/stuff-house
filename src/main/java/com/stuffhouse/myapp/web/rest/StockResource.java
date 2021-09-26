@@ -33,7 +33,7 @@ public class StockResource {
     }
 
     @GetMapping("/type/{type}")
-    public long addStock(@PathVariable("type") String type,Pageable pageable) {
+    public long getStockCountByType(@PathVariable("type") String type,Pageable pageable) {
         return stockService.getStocksByType(type,pageable);
     }
 

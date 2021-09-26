@@ -1,5 +1,6 @@
 package com.stuffhouse.myapp.service;
 
+import com.stuffhouse.myapp.domain.Compteur;
 import com.stuffhouse.myapp.domain.Expenses;
 import com.stuffhouse.myapp.repository.ExpensesRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -45,4 +46,15 @@ public class ExpensesService {
     }
 
 
+    public long getExpensesCount() {
+        Compteur c= new Compteur();
+        expensesRepository.findAll().forEach(a->{
+            c.setX(c.getX()+a.getCost());
+
+
+
+        });
+        return  c.getX();
+
+    }
 }
