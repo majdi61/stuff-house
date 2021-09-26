@@ -32,15 +32,20 @@ public class StockResource {
         return stockService.addStock(stock);
     }
 
+    @GetMapping("/type/{type}")
+    public long addStock(@PathVariable("type") String type,Pageable pageable) {
+        return stockService.getStocksByType(type,pageable);
+    }
+
     @GetMapping("")
     public Page<Stock> getVisitsPage(@Filter(entityClass = Stock.class) Document document, Pageable pageable) {
         return stockService.getStocksPage(document, pageable);
     }
-    @GetMapping(path = "{id}")
+   /** @GetMapping(path = "{id}")
     public Optional<Stock> readQueryUsingId(@PathVariable("id") String id) {
         return stockService.getStockInformationById(id);
     }
-
+*/
 
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
