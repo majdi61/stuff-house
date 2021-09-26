@@ -37,8 +37,13 @@ public class ExpensesResource {
     }
 
     @GetMapping("/allexpenses")
-    public long getStockCountByType() {
+    public double getStockCountByType() {
         return expensesService.getExpensesCount();
+    }
+
+    @GetMapping("/profits")
+    public double getProfits() {
+        return expensesService.getprofits();
     }
 
     @DeleteMapping(path = "/delete/{id}")

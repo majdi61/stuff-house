@@ -16,6 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Compteur {
     @Builder.Default()
     private long x=0;
+    @Builder.Default()
+    private double d=0;
 
 
 }
