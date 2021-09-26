@@ -1,7 +1,7 @@
 package com.stuffhouse.myapp.service;
 
-import com.stuffhouse.myapp.domain.Article;
-import com.stuffhouse.myapp.repository.ArticleRepository;
+import com.stuffhouse.myapp.domain.Expenses;
+import com.stuffhouse.myapp.repository.ExpensesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
@@ -16,36 +16,33 @@ import java.util.Optional;
 @Service
 public class ExpensesService {
 
-    private final ArticleRepository articleRepository;
+    private final ExpensesRepository expensesRepository;
 
-    public ExpensesService(ArticleRepository articleRepository) {
-        this.articleRepository = articleRepository;
+    public ExpensesService(ExpensesRepository expensesRepository) {
+        this.expensesRepository = expensesRepository;
     }
 
-    public Article insertArticleData(Article article) {
-        return articleRepository.save(article);
+    public Expenses insertExpensesData(Expenses expenses) {
+        return expensesRepository.save(expenses);
     }
 
-    public Collection<Article> getAllArticleInformation() {
-        return articleRepository.findAll();
+
+
+    public Optional<Expenses> getExpensesInformationById(String id) {
+        return expensesRepository.findById(id);
     }
 
-    public Optional<Article> getArticleInformationById(String id) {
-        return articleRepository.findById(id);
-    }
-
-    public void deleteArticleUsingId(String id) {
+    public void deleteExpensesUsingId(String id) {
         try {
-            articleRepository.deleteById(id);
+            expensesRepository.deleteById(id);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
     }
 
-    public Page<Article> getArticlesPage(Document document, Pageable pageable) {
-        return articleRepository.filter(Optional.ofNullable(document).orElse(new Document()), pageable);
+    public Page<Expenses> getExpensesPage(Document document, Pageable pageable) {
+        return expensesRepository.filter(Optional.ofNullable(document).orElse(new Document()), pageable);
     }
-
 
 
 }

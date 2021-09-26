@@ -1,6 +1,7 @@
 package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Article;
+import com.stuffhouse.myapp.domain.Expenses;
 import com.stuffhouse.myapp.domain.Stock;
 import com.stuffhouse.myapp.repository.StockRepository;
 import org.bson.Document;
@@ -16,8 +17,11 @@ public class StockService {
 
     private final StockRepository stockRepository;
 
-    public StockService(StockRepository stockRepository) {
+    private final ExpensesService expensesService;
+
+    public StockService(StockRepository stockRepository, ExpensesService expensesService) {
         this.stockRepository = stockRepository;
+        this.expensesService = expensesService;
     }
 
 
@@ -64,11 +68,24 @@ public class StockService {
         }
     }
 
-    public Stock addStock(Stock stock) {
+    public Stock addStock(Stock stock,double cost) {
+
+
 
         Stock oldStock = stockRepository.findStockById(stock.getId());
 
         oldStock.setQuantity(oldStock.getQuantity() + stock.getQuantity());
+
+        Expenses expenses = Expenses.builder()
+            .name(stock.getArticle().getName())
+            .type(stock.getType())
+            .quantity(stock.getQuantity())
+            .description("alimentation de stock de "+ stock.getArticle().getName())
+            .cost(cost)
+            .build();
+
+
+        expensesService.insertExpensesData(expenses);
 
 
         return stockRepository.save(oldStock);

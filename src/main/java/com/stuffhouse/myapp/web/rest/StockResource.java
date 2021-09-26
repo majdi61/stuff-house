@@ -28,8 +28,8 @@ public class StockResource {
     }
 
     @PostMapping("/addstock")
-    public Stock addStock(@RequestBody Stock stock) {
-        return stockService.addStock(stock);
+    public Stock addStock(@RequestBody Stock stock,double cost) {
+        return stockService.addStock(stock,cost);
     }
 
     @GetMapping("")

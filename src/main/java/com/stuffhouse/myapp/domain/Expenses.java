@@ -18,7 +18,9 @@ public class Expenses {
     private String id;
     private String name;
     private String type;
+    private long quantity;
     private String description;
     private double cost;
+
 
 }
