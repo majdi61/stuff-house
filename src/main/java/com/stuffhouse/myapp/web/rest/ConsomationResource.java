@@ -34,6 +34,12 @@ public class ConsomationResource {
     }
 
 
+    @GetMapping("/unpaid")
+    public double getProfits() {
+        return consomationService.getCredits();
+    }
+
+
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
         consomationService.deleteConsomationUsingId(id);

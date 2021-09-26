@@ -43,7 +43,7 @@ public class ExpensesResource {
 
     @GetMapping("/profits")
     public double getProfits() {
-        return expensesService.getprofits();
+        return expensesService.getProfits();
     }
 
     @DeleteMapping(path = "/delete/{id}")

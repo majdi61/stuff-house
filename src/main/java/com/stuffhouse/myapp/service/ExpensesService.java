@@ -61,7 +61,7 @@ public class ExpensesService {
 
     }
 
-    public double getprofits() {
+    public double getProfits() {
 
         Compteur c= new Compteur();
         consomationRepository.findAll().forEach(a->{
