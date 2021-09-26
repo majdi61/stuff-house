@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("article")
+@RequestMapping("/api/article")
 public class ArticleController {
 
     private final ArticleService articleService;
