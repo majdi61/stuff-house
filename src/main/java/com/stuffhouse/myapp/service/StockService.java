@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -30,21 +29,22 @@ public class StockService {
         return stockRepository.save(Stock);
     }
 
-    public Stock updateStock(Article aricle ,long quantity,String op) {
-        Stock oldStock= stockRepository.findStockByArticle(aricle);
+    public Stock updateStock(Article aricle, long quantity, String op) {
+        Stock oldStock = stockRepository.findStockByArticle(aricle);
 
-        switch (op){
-            case "+":   oldStock.setQuantity(oldStock.getQuantity()+quantity);
-            break;
-            case "-":  oldStock.setQuantity(oldStock.getQuantity()-quantity);
-            break;
+        switch (op) {
+            case "+":
+                oldStock.setQuantity(oldStock.getQuantity() + quantity);
+                break;
+            case "-":
+                oldStock.setQuantity(oldStock.getQuantity() - quantity);
+                break;
 
 
         }
 
         return stockRepository.save(oldStock);
     }
-
 
 
     public Page<Stock> getStocksPage(Document document, Pageable pageable) {
@@ -66,13 +66,12 @@ public class StockService {
 
     public Stock addStock(Stock stock) {
 
-        Stock oldStock= stockRepository.findStockByArticle(stock.getArticle());
+        Stock oldStock = stockRepository.findStockById(stock.getId());
 
-        oldStock.setQuantity(oldStock.getQuantity()+stock.getQuantity());
+        oldStock.setQuantity(oldStock.getQuantity() + stock.getQuantity());
 
 
         return stockRepository.save(oldStock);
-
 
 
     }

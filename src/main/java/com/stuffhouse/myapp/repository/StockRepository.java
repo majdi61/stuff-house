@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockRepository extends MongoRepository<Stock, String> {
     Stock findStockByArticle(Article article);
+    Stock findStockById(String id);
     @Query("?0")
     Page<Stock> filter(Document document, Pageable pageable);
 
