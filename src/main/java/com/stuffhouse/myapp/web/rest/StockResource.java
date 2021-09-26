@@ -41,11 +41,11 @@ public class StockResource {
     public Page<Stock> getVisitsPage(@Filter(entityClass = Stock.class) Document document, Pageable pageable) {
         return stockService.getStocksPage(document, pageable);
     }
-   /** @GetMapping(path = "{id}")
+    @GetMapping(path = "{id}")
     public Optional<Stock> readQueryUsingId(@PathVariable("id") String id) {
         return stockService.getStockInformationById(id);
     }
-*/
+
 
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
