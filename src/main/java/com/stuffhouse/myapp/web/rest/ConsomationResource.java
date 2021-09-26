@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/consomation")
+@RequestMapping("/api/consomation")
 public class ConsomationResource {
 
     private final ConsomationService consomationService;

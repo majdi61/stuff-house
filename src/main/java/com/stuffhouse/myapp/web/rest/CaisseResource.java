@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("Caisse")
+@RequestMapping("/api/Caisse")
 public class CaisseResource {
 
     private final CaisseService caisseService;

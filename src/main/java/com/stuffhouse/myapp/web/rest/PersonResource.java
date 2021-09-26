@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("person")
+@RequestMapping("/api/person")
 public class PersonResource {
 
     private final PersonService personService;

@@ -23,7 +23,11 @@ public class StockService {
 
 
     public Stock insertStockData(Stock Stock) {
-        return stockRepository.insert(Stock);
+        return stockRepository.save(Stock);
+    }
+
+    public Stock addStockData(Stock Stock) {
+        return stockRepository.save(Stock);
     }
 
     public Stock updateStock(Article aricle ,long quantity,String op) {
@@ -60,4 +64,16 @@ public class StockService {
         }
     }
 
+    public Stock addStock(Stock stock) {
+
+        Stock oldStock= stockRepository.findStockByArticle(stock.getArticle());
+
+        oldStock.setQuantity(oldStock.getQuantity()+stock.getQuantity());
+
+
+        return stockRepository.save(oldStock);
+
+
+
+    }
 }

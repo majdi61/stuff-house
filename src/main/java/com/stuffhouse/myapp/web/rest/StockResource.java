@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("stock")
+@RequestMapping("/api/stock")
 public class StockResource {
 
     private final StockService stockService;
@@ -25,6 +25,11 @@ public class StockResource {
     @PostMapping
     public Stock create(@RequestBody Stock stock) {
         return stockService.insertStockData(stock);
+    }
+
+    @PostMapping("/addstock")
+    public Stock addStock(@RequestBody Stock stock) {
+        return stockService.addStock(stock);
     }
 
     @GetMapping("")
