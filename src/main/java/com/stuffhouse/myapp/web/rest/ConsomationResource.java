@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/consomation")
-public class ConsomationController {
+public class ConsomationResource {
 
     private final ConsomationService consomationService;
 
-    public ConsomationController(ConsomationService consomationService) {
+    public ConsomationResource(ConsomationService consomationService) {
         this.consomationService = consomationService;
     }
 

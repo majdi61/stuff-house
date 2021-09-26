@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("person")
-public class PersonController {
+public class PersonResource {
 
     private final PersonService personService;
 
-    public PersonController(PersonService personService) {
+    public PersonResource(PersonService personService) {
         this.personService = personService;
     }
 

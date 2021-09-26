@@ -2,12 +2,18 @@ package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Article;
 import com.stuffhouse.myapp.repository.ArticleRepository;
+import lombok.extern.slf4j.Slf4j;
+
+import org.bson.Document;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
+@Slf4j
 @Service
 public class ArticleService {
 
@@ -36,5 +42,11 @@ public class ArticleService {
             e.printStackTrace();
         }
     }
+
+    public Page<Article> getArticlesPage(Document document, Pageable pageable) {
+        return articleRepository.filter(Optional.ofNullable(document).orElse(new Document()), pageable);
+    }
+
+
 
 }

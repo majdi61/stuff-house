@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("stock")
-public class StockController {
+public class StockResource {
 
     private final StockService stockService;
 
-    public StockController(StockService stockService) {
+    public StockResource(StockService stockService) {
         this.stockService = stockService;
     }
 
