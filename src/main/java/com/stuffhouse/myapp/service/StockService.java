@@ -68,20 +68,18 @@ public class StockService {
         }
     }
 
-    public Stock addStock(Stock stock,double cost) {
-
-
+    public Stock addStock(Stock stock) {
 
         Stock oldStock = stockRepository.findStockById(stock.getId());
 
         oldStock.setQuantity(oldStock.getQuantity() + stock.getQuantity());
 
-        Expenses expenses = Expenses.builder()
-            .name(stock.getArticle().getName())
-            .type(stock.getType())
+       Expenses expenses = Expenses.builder()
+            .name(oldStock.getArticle().getName())
+            .type(oldStock.getType())
             .quantity(stock.getQuantity())
-            .description("alimentation de stock de "+ stock.getArticle().getName())
-            .cost(cost)
+            .description("alimentation de stock de "+ oldStock.getArticle().getName())
+            .cost(stock.getCost())
             .build();
 
 

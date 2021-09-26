@@ -23,6 +23,8 @@ public class Stock {
     private Article article;
     private long quantity;
 
+    private long cost;
+
     private String type;
 
 }

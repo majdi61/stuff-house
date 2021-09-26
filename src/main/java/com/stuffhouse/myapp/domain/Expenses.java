@@ -20,7 +20,7 @@ public class Expenses {
     private String type;
     private long quantity;
     private String description;
-    private double cost;
+    private long cost;
 
 
 }
