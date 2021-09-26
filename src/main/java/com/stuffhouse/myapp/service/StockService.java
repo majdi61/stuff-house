@@ -3,6 +3,9 @@ package com.stuffhouse.myapp.service;
 import com.stuffhouse.myapp.domain.Article;
 import com.stuffhouse.myapp.domain.Stock;
 import com.stuffhouse.myapp.repository.StockRepository;
+import org.bson.Document;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -40,9 +43,10 @@ public class StockService {
 
 
 
-    public Collection<Stock> getAllStockInformation() {
-        return stockRepository.findAll();
+    public Page<Stock> getStocksPage(Document document, Pageable pageable) {
+        return stockRepository.filter(Optional.ofNullable(document).orElse(new Document()), pageable);
     }
+
 
     public Optional<Stock> getStockInformationById(String id) {
         return stockRepository.findById(id);

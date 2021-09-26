@@ -2,6 +2,10 @@ package com.stuffhouse.myapp.web.rest;
 
 import com.stuffhouse.myapp.domain.Stock;
 import com.stuffhouse.myapp.service.StockService;
+import com.turkraft.springfilter.boot.Filter;
+import org.bson.Document;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -23,11 +27,10 @@ public class StockResource {
         return stockService.insertStockData(stock);
     }
 
-    @GetMapping
-    public Collection<Stock> read() {
-        return stockService.getAllStockInformation();
+    @GetMapping("")
+    public Page<Stock> getVisitsPage(@Filter(entityClass = Stock.class) Document document, Pageable pageable) {
+        return stockService.getStocksPage(document, pageable);
     }
-
     @GetMapping(path = "{id}")
     public Optional<Stock> readQueryUsingId(@PathVariable("id") String id) {
         return stockService.getStockInformationById(id);
