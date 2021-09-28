@@ -2,18 +2,22 @@ package com.stuffhouse.myapp.web.rest;
 
 import com.stuffhouse.myapp.domain.Stock;
 import com.stuffhouse.myapp.service.StockService;
+import com.turkraft.springfilter.boot.Filter;
+import org.bson.Document;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("stock")
-public class StockController {
+@RequestMapping("/api/stock")
+public class StockResource {
 
     private final StockService stockService;
 
-    public StockController(StockService stockService) {
+    public StockResource(StockService stockService) {
         this.stockService = stockService;
     }
 
@@ -23,11 +27,20 @@ public class StockController {
         return stockService.insertStockData(stock);
     }
 
-    @GetMapping
-    public Collection<Stock> read() {
-        return stockService.getAllStockInformation();
+    @PostMapping("/addstock")
+    public Stock addStock(@RequestBody Stock stock) {
+        return stockService.addStock(stock);
     }
 
+    @GetMapping("/type/{type}")
+    public long getStockCountByType(@PathVariable("type") String type,Pageable pageable) {
+        return stockService.getStocksByType(type,pageable);
+    }
+
+    @GetMapping("")
+    public Page<Stock> getVisitsPage(@Filter(entityClass = Stock.class) Document document, Pageable pageable) {
+        return stockService.getStocksPage(document, pageable);
+    }
     @GetMapping(path = "{id}")
     public Optional<Stock> readQueryUsingId(@PathVariable("id") String id) {
         return stockService.getStockInformationById(id);

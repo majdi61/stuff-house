@@ -8,12 +8,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("Caisse")
-public class CaisseController {
+@RequestMapping("/api/Caisse")
+public class CaisseResource {
 
     private final CaisseService caisseService;
 
-    public CaisseController(CaisseService caisseService) {
+    public CaisseResource(CaisseService caisseService) {
         this.caisseService = caisseService;
     }
 

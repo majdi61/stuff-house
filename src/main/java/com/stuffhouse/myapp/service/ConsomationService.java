@@ -1,8 +1,10 @@
 package com.stuffhouse.myapp.service;
 
+import com.stuffhouse.myapp.domain.Compteur;
 import com.stuffhouse.myapp.domain.Consomation;
 import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
+import com.stuffhouse.myapp.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,13 +15,17 @@ import java.util.Optional;
 public class ConsomationService {
 
     private final ConsomationRepository consomationRepository;
+    private final PersonRepository personRepository;
     private final StockService stockService;
     private final CaisseService caisseService;
     private final PersonService personService;
 
 
-    public ConsomationService(ConsomationRepository consomationRepository, StockService stockService, CaisseService caisseService, PersonService personService) {
+    public ConsomationService(ConsomationRepository consomationRepository, PersonRepository personRepository, StockService stockService, CaisseService caisseService, PersonService personService) {
         this.consomationRepository = consomationRepository;
+        this.personRepository = personRepository;
+
+
         this.stockService = stockService;
 
         this.caisseService = caisseService;
@@ -58,6 +64,18 @@ public class ConsomationService {
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
+    }
+
+    public double getCredits() {
+
+        Compteur c = new Compteur();
+        personRepository.findAll().forEach(a -> {
+            c.setD(c.getD() + a.getCredit());
+
+        });
+
+
+        return c.getD();
     }
 
 

@@ -15,7 +15,6 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-
 @Document(collection = "Consomation")
 public class Consomation {
     @Id

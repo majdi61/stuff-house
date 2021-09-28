@@ -8,12 +8,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/consomation")
-public class ConsomationController {
+@RequestMapping("/api/consomation")
+public class ConsomationResource {
 
     private final ConsomationService consomationService;
 
-    public ConsomationController(ConsomationService consomationService) {
+    public ConsomationResource(ConsomationService consomationService) {
         this.consomationService = consomationService;
     }
 
@@ -31,6 +31,12 @@ public class ConsomationController {
     @GetMapping(path = "{id}")
     public Optional<Consomation> readQueryUsingId(@PathVariable("id") String id) {
         return consomationService.getConsomationInformationById(id);
+    }
+
+
+    @GetMapping("/unpaid")
+    public double getProfits() {
+        return consomationService.getCredits();
     }
 
 
