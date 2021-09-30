@@ -130,11 +130,12 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: https://accounts.google.com
+            issuer-uri: https://dev-p-cgoq59.us.auth0.com/
         registration:
           oidc:
-            client-id: 135773044996-ks53tfemrmuktvbe6f0lp1mqh009lo7e.apps.googleusercontent.com
-            client-secret: l1OHkaYXH5u2nD2Filht_kJc
+            client-id: W89MXrcHpR1aEiBtYhuG7FzphrY9lbiC
+            client-secret: mdANSJwQNR_Me2teqiDUG7lXNBee6YJ2emb6Gd_hL6i43-aqd7A_ZT_CpiNXF5zd
+            scope: openid,profile,email
 
 
 server:
@@ -183,7 +184,7 @@ jhipster:
     content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
     oauth2:
       audience:
-        - account
+        - https://dev-p-cgoq59.us.auth0.com/api/v2/
         - api://default
 # ===================================================================
 # Application specific properties
