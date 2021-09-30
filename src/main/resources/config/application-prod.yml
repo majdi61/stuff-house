@@ -33,7 +33,7 @@ spring:
       enabled: false
   data:
     mongodb:
-      uri: mongodb+srv://admin:admin@cluster0.udh9u.mongodb.net/stuffHouse?retryWrites=true&w=majority
+      uri: mongodb+srv://admin:admin@cluster0.udh9u.mongodb.net/stuffHouse?retryWrites=true&w=majority&authSource=admin
       database: stuffHouse
   thymeleaf:
     cache: true
