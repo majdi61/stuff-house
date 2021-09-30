@@ -22,6 +22,7 @@ public class PersonResource {
         return personService.insertPersonData(person);
     }
 
+    @CrossOrigin("https://stuffhouse.web.app/person")
     @GetMapping
     public Collection<Person> read() {
         return personService.getAllPersonInformation();
