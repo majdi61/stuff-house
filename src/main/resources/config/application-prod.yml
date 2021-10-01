@@ -86,7 +86,7 @@ jhipster:
     allowed-methods: "*"
     allowed-headers: "*"
     exposed-headers: "Authorization,Link,X-Total-Count"
-    allow-credentials: true
+    allow-credentials: false
     max-age: 1800
   http:
     cache: # Used by the CachingHttpHeadersFilter
