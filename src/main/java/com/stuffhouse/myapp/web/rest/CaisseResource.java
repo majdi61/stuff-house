@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Caisse")
+@CrossOrigin(origins = {"https://stuffhouse.web.app"},methods = {RequestMethod.GET ,RequestMethod.POST})
 public class CaisseResource {
 
     private final CaisseService caisseService;

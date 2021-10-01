@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/expenses")
+@CrossOrigin(origins = {"https://stuffhouse.web.app"},methods = {RequestMethod.GET ,RequestMethod.POST})
 public class ExpensesResource {
 
     private final ExpensesService expensesService;
