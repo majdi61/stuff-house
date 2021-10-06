@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/person")
+@CrossOrigin(origins = {"https://stuffhouse.web.app"},methods = {RequestMethod.GET ,RequestMethod.POST})
 public class PersonResource {
 
     private final PersonService personService;
@@ -22,7 +23,6 @@ public class PersonResource {
         return personService.insertPersonData(person);
     }
 
-    @CrossOrigin("https://stuffhouse.web.app/person")
     @GetMapping
     public Collection<Person> read() {
         return personService.getAllPersonInformation();
