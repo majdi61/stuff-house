@@ -20,7 +20,7 @@ public class ArticleResource {
         this.articleService = articleService;
     }
 
-
+    @CrossOrigin("https://stuffhouse.web.app/article")
     @PostMapping
     public Article create(@RequestBody Article Article) {
         return articleService.insertArticleData(Article);
@@ -30,18 +30,18 @@ public class ArticleResource {
     public Collection<Article> read() {
         return articleService.getAllArticleInformation();
     }
-*/
+*/  @CrossOrigin("https://stuffhouse.web.app/article")
     @GetMapping(path = "{id}")
     public Optional<Article> readQueryUsingId(@PathVariable("id") String id) {
         return articleService.getArticleInformationById(id);
     }
 
-
+    @CrossOrigin("https://stuffhouse.web.app/article")
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
         articleService.deleteArticleUsingId(id);
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/article")
     @GetMapping("")
     public Page<Article> getArticlesPage(@Filter(entityClass = Article.class) Document document, Pageable pageable) {
         return articleService.getArticlesPage(document, pageable);

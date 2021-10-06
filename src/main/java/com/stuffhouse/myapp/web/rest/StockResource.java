@@ -21,32 +21,33 @@ public class StockResource {
         this.stockService = stockService;
     }
 
-
+    @CrossOrigin("https://stuffhouse.web.app/stock")
     @PostMapping
     public Stock create(@RequestBody Stock stock) {
         return stockService.insertStockData(stock);
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/stock")
     @PostMapping("/addstock")
     public Stock addStock(@RequestBody Stock stock) {
         return stockService.addStock(stock);
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/stock")
     @GetMapping("/type/{type}")
     public long getStockCountByType(@PathVariable("type") String type,Pageable pageable) {
         return stockService.getStocksByType(type,pageable);
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/stock")
     @GetMapping("")
     public Page<Stock> getVisitsPage(@Filter(entityClass = Stock.class) Document document, Pageable pageable) {
         return stockService.getStocksPage(document, pageable);
     }
+    @CrossOrigin("https://stuffhouse.web.app/stock")
     @GetMapping(path = "{id}")
     public Optional<Stock> readQueryUsingId(@PathVariable("id") String id) {
         return stockService.getStockInformationById(id);
     }
 
-
+    @CrossOrigin("https://stuffhouse.web.app/stock")
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
         stockService.deleteStockUsingId(id);

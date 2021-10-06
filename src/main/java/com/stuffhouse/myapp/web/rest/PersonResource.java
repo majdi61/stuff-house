@@ -16,7 +16,7 @@ public class PersonResource {
     public PersonResource(PersonService personService) {
         this.personService = personService;
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/person")
     @PostMapping
     public Person create(@RequestBody Person person) {
         return personService.insertPersonData(person);
@@ -27,17 +27,17 @@ public class PersonResource {
     public Collection<Person> read() {
         return personService.getAllPersonInformation();
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/person")
     @GetMapping(path = "{id}")
     public Optional<Person> readQueryUsingId(@PathVariable("id") String id) {
         return personService.getPersonInformationById(id);
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/person")
     @PutMapping(path = "/update/{id}")
     public void update(@PathVariable String id, @RequestBody Person person) {
         personService.updatePersonUsingId(id, person);
     }
-
+    @CrossOrigin("https://stuffhouse.web.app/person")
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
         personService.deletePersonUsingId(id);
