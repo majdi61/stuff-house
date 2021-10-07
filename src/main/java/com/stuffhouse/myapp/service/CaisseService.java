@@ -31,9 +31,9 @@ public class CaisseService {
 
     public Caisse updateCaisseUsingId(String id,double amount, String op) {
         Optional<Caisse> findCaisseQuery = caisseRepository.findById(id);
-        Caisse oldCaisse = caisseRepository.findById(id).get();
+        Caisse oldCaisse = findCaisseQuery.get();
 
-        double caisseOldValue = findCaisseQuery.get().getValeur();
+        double caisseOldValue = oldCaisse.getValeur();
 
 
         switch (op) {
