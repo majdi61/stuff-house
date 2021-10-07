@@ -13,9 +13,11 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
+    private final ConsomationService consomationService;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, ConsomationService consomationService) {
         this.personRepository = personRepository;
+        this.consomationService = consomationService;
     }
 
     public Person insertPersonData(Person person) {
