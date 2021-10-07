@@ -46,6 +46,7 @@ public class ConsomationService {
             personService.insertPersonData(person);
         }
 
+        consomation.setValueToPay(consomation.getArticle().getPrix()*consomation.getQuantity());
 
         return consomationRepository.insert(consomation);
     }
