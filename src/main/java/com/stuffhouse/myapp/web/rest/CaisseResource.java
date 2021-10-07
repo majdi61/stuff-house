@@ -1,6 +1,7 @@
 package com.stuffhouse.myapp.web.rest;
 
 import com.stuffhouse.myapp.domain.Caisse;
+import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.service.CaisseService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,14 @@ public class CaisseResource {
     public Caisse create(@RequestBody Caisse caisse) {
         return caisseService.insertCaisseData(caisse);
     }
+
+    @CrossOrigin("https://stuffhouse.web.app/Caisse")
+    @PostMapping("/paycredit")
+    public Person create(@RequestBody String code) {
+
+        return caisseService.updatePersonCreditIfPayCredit(code);
+    }
+
     @CrossOrigin("https://stuffhouse.web.app/Caisse")
     @GetMapping
     public Collection<Caisse> read() {

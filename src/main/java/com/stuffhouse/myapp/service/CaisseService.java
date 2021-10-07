@@ -1,7 +1,9 @@
 package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Caisse;
+import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.CaisseRepository;
+import com.stuffhouse.myapp.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,8 +15,14 @@ public class CaisseService {
 
     private final CaisseRepository caisseRepository;
 
-    public CaisseService(CaisseRepository caisseRepository) {
+    private final PersonRepository personRepository;
+
+    private final ConsomationService consomationService;
+
+    public CaisseService(CaisseRepository caisseRepository, PersonRepository personRepository, ConsomationService consomationService) {
         this.caisseRepository = caisseRepository;
+        this.personRepository = personRepository;
+        this.consomationService = consomationService;
     }
 
     public Caisse insertCaisseData(Caisse caisse) {
@@ -68,6 +76,24 @@ public class CaisseService {
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public Person updatePersonCreditIfPayCredit(String code) {
+        Optional<Person> findPersonQuery = Optional.ofNullable(personRepository.getPersonByCode(code));
+        Person personValues = findPersonQuery.get();
+
+
+        consomationService.getConsomationsByCode(personValues.getCode()).forEach(consomation -> {
+            if(!consomation.getPaid())
+                consomation.setPaid(true);
+            consomationService.updateConsomationsIfPaid(consomation);
+
+
+        });
+        updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249",personValues.getCredit());
+        personValues.setCredit(0);
+        return personRepository.save(personValues);
     }
 
 }
