@@ -25,8 +25,8 @@ public class Consomation {
     private Article article;
 
     private long quantity;
-    @Builder.Default
-    private double valueToPay = article.getPrix()*quantity;
+
+    private double valueToPay ;
     private Boolean paid;
 
 
