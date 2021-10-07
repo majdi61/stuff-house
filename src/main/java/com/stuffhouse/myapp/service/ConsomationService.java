@@ -44,7 +44,7 @@ public class ConsomationService {
 
         stockService.updateStock(consomation.getArticle(), consomation.getQuantity(), "-");
         if (consomation.getPaid()) {
-            caisseService.updateCaisseUsingId("615e3266d5f0b54a6ba4a249", consomation.getValueToPay(), "+");
+            caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249", consomation.getValueToPay());
 
         } else {
 

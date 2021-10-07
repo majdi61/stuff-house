@@ -49,6 +49,20 @@ public class CaisseService {
 
         return caisseRepository.save(caisseValues);
     }
+    public Caisse updateCaisseIfConsomationPaid(String id,double amount) {
+        Optional<Caisse> findCaisseQuery = Optional.ofNullable(caisseRepository.findCaisseById(id));
+        Caisse caisseValues = findCaisseQuery.get();
+
+
+        double caisseOldValue = caisseValues.getValeur();
+
+        caisseValues.setValeur(caisseOldValue+amount);
+
+
+        return caisseRepository.save(caisseValues);
+    }
+
+
 
 
     public void deleteCaisseUsingId(String id) {
