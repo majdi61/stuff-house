@@ -24,6 +24,7 @@ public class Consomation {
     @DBRef
     private Article article;
 
+    private String code;
     private long quantity;
 
     private double valueToPay ;

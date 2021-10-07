@@ -29,6 +29,10 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
+    public Person getPersonByCode(String code) {
+        return personRepository.getPersonByCode(code);
+    }
+
     public Person updatePersonUsingId(String id, Person person) {
         Optional<Person> findPersonQuery = personRepository.findById(id);
         Person personValues = findPersonQuery.get();
