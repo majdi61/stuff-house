@@ -49,17 +49,14 @@ public class CaisseService {
 
         return caisseRepository.save(caisseValues);
     }
-    public Caisse updateCaisseIfConsomationPaid(String id,double amount) {
-        Optional<Caisse> findCaisseQuery = Optional.ofNullable(caisseRepository.findCaisseById(id));
-        Caisse caisseValues = findCaisseQuery.get();
+    public void updateCaisseIfConsomationPaid(String id,double amount) {
 
 
 
-
-        caisseValues.setValeur(caisseValues.getValeur()+amount);
-
-
-        return caisseRepository.save(caisseValues);
+        caisseRepository.findById(id).ifPresent(caisse -> {
+            caisse.setValeur(caisse.getValeur()+amount);
+            caisseRepository.save(caisse);
+        });
     }
 
 
