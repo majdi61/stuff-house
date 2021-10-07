@@ -39,10 +39,10 @@ public class ConsomationService {
     }
 
 
-    public void insertConsomationData(Consomation consomation) {
+    public String insertConsomationData(Consomation consomation) {
 
 
-        if(personService.getPersonByCode(consomation.getCode()).isPresent()) {
+        if(personService.getPersonByCode(consomation.getCode()).isPresent() && consomation.getQuantity()<stockService.getStockByType(consomation.getArticle()).getQuantity()) {
 
             Optional<Article> article = articleService.getArticleInformationById(consomation.getArticle().getId());
 
@@ -67,9 +67,10 @@ public class ConsomationService {
                 .build();
 
            consomationRepository.insert(consomationfinal);
+           return "success";
         }
 
-        log.debug("wrong code !!!!");
+       return "error";
 
     }
 

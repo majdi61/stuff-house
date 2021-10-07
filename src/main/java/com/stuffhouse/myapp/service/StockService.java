@@ -63,6 +63,10 @@ public class StockService {
         return stockRepository.findAll();
     }
 
+    public Stock getStockByType(Article article) {
+        return stockRepository.findStockByArticle(article);
+    }
+
     public long getStocksByType(String type, Pageable pageable) {
         Compteur c= new Compteur();
             stockRepository.findStockByType(type,pageable).forEach(a->{
