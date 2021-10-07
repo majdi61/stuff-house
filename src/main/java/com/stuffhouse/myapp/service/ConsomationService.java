@@ -77,7 +77,7 @@ public class ConsomationService {
     }
 
     public Page<Consomation> findConsomationsPage(Pageable pageable) {
-        return consomationRepository.findConsomationsPage(pageable);
+        return consomationRepository.findAll(pageable);
     }
 
     public Optional<Consomation> getConsomationInformationById(String id) {

@@ -16,6 +16,6 @@ public interface ConsomationRepository extends MongoRepository<Consomation, Stri
     List<Consomation> findConsomationsByCode(String code);
 
 
-    Page<Consomation> findConsomationsPage (Pageable pageable);
+    Page<Consomation> findAll (Pageable pageable);
 
 }
