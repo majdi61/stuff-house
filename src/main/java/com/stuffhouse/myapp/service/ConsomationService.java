@@ -68,7 +68,7 @@ public class ConsomationService {
         return consomationRepository.findAll();
     }
 
-    public Consomation updateConsomationIfPaid(Consomation consomation) {
+    public Consomation updateConsomationsIfPaid(Consomation consomation) {
         return consomationRepository.save(consomation);
     }
 
