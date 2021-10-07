@@ -30,24 +30,24 @@ public class CaisseService {
     }
 
     public Caisse updateCaisseUsingId(String id,double amount, String op) {
-        Optional<Caisse> findCaisseQuery = caisseRepository.findById(id);
-        Caisse oldCaisse = findCaisseQuery.get();
+        Optional<Caisse> findCaisseQuery = Optional.ofNullable(caisseRepository.findCaisseById(id));
+        Caisse caisseValues = findCaisseQuery.get();
 
-        double caisseOldValue = oldCaisse.getValeur();
+        double caisseOldValue = caisseValues.getValeur();
 
 
         switch (op) {
             case "+":
-                oldCaisse.setValeur(caisseOldValue + amount);
+                caisseValues.setValeur(caisseOldValue + amount);
                 break;
             case "-":
-                oldCaisse.setValeur(caisseOldValue - amount);
+                caisseValues.setValeur(caisseOldValue - amount);
                 break;
 
         }
 
 
-        return caisseRepository.save(oldCaisse);
+        return caisseRepository.save(caisseValues);
     }
 
 
