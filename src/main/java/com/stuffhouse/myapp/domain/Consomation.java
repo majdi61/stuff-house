@@ -25,14 +25,12 @@ public class Consomation {
     private Article article;
 
     private long quantity;
-
-    private double valueToPay;
+    @Builder.Default
+    private double valueToPay = article.getPrix()*quantity;
     private Boolean paid;
 
 
     @Builder.Default
     private Instant time = Instant.now();
 
-    public Consomation(Person person, Article article, Boolean paid) {
-    }
 }

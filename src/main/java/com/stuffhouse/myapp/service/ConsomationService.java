@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+
 @Service
 public class ConsomationService {
 
@@ -41,12 +42,11 @@ public class ConsomationService {
 
 
         } else {
+
             Person person = consomation.getPerson();
             person.setCredit(person.getCredit() + consomation.getValueToPay());
             personService.insertPersonData(person);
         }
-
-        consomation.setValueToPay(consomation.getArticle().getPrix()*consomation.getQuantity());
 
         return consomationRepository.insert(consomation);
     }

@@ -37,8 +37,8 @@ public class StockService {
         return stockRepository.save(Stock);
     }
 
-    public Stock updateStock(Article aricle, long quantity, String op) {
-        Stock oldStock = stockRepository.findStockByArticle(aricle);
+    public Stock updateStock(Article article, long quantity, String op) {
+        Stock oldStock = stockRepository.findStockByArticle(article);
 
         switch (op) {
             case "+":
