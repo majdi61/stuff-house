@@ -54,9 +54,9 @@ public class CaisseService {
         Caisse caisseValues = findCaisseQuery.get();
 
 
-        double caisseOldValue = caisseValues.getValeur();
 
-        caisseValues.setValeur(caisseOldValue+amount);
+
+        caisseValues.setValeur(caisseValues.getValeur()+amount);
 
 
         return caisseRepository.save(caisseValues);
