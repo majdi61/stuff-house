@@ -3,11 +3,13 @@ package com.stuffhouse.myapp.service;
 import com.stuffhouse.myapp.domain.Article;
 import com.stuffhouse.myapp.domain.Compteur;
 import com.stuffhouse.myapp.domain.Consomation;
+import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
 import com.stuffhouse.myapp.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -57,6 +59,7 @@ public class ConsomationService {
             .person(personService.getPersonByCode(consomation.getCode()))
             .paid(consomation.getPaid())
             .valueToPay(ValueToPayCalcul)
+            .code(consomation.getCode())
             .build();
 
         return consomationRepository.insert(consomationfinal);
@@ -88,6 +91,31 @@ public class ConsomationService {
 
 
         return c.getD();
+    }
+
+    public Consomation updateConsomationIfPaid(Consomation consomation) {
+        return consomationRepository.save(consomation);
+    }
+
+    public List<Consomation> getConsomationsByCode(String code) {
+        return consomationRepository.findConsomationsByCode(code);
+    }
+
+    public Person updatePersonCreditIfPayCredit(String code) {
+        Optional<Person> findPersonQuery = Optional.ofNullable(personRepository.getPersonByCode(code));
+        Person personValues = findPersonQuery.get();
+
+
+        getConsomationsByCode(personValues.getCode()).forEach(consomation -> {
+            if(!consomation.getPaid())
+                consomation.setPaid(true);
+           updateConsomationIfPaid(consomation);
+
+
+        });
+        caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249",personValues.getCredit());
+        personValues.setCredit(0);
+        return personRepository.save(personValues);
     }
 
 

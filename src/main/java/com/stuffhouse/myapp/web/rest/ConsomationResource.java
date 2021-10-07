@@ -1,6 +1,7 @@
 package com.stuffhouse.myapp.web.rest;
 
 import com.stuffhouse.myapp.domain.Consomation;
+import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.service.ConsomationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,13 @@ public class ConsomationResource {
     public Consomation create(@RequestBody Consomation consomation) {
         return consomationService.insertConsomationData(consomation);
     }
+
+    @CrossOrigin("https://stuffhouse.web.app/consomation")
+    @PostMapping
+    public Person payCredit(@RequestBody String code) {
+        return consomationService.updatePersonCreditIfPayCredit(code);
+    }
+
     @CrossOrigin("https://stuffhouse.web.app/consomation")
     @GetMapping
     public Collection<Consomation> read() {
