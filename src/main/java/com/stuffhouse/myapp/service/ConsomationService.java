@@ -58,6 +58,7 @@ public class ConsomationService {
             .quantity(consomation.getQuantity())
             .person(consomation.getPerson())
             .paid(consomation.getPaid())
+            .valueToPay(consomation.getQuantity()*consomation.getArticle().getPrix())
             .build();
         return consomationRepository.insert(consomationfinal);
     }
