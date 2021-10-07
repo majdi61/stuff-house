@@ -15,13 +15,10 @@ public class PersonService {
 
     private final CaisseService caisseService;
 
-    private final ConsomationService consomationService;
-
-    public PersonService(PersonRepository personRepository, CaisseService caisseService, ConsomationService consomationService) {
+    public PersonService(PersonRepository personRepository, CaisseService caisseService) {
         this.personRepository = personRepository;
 
         this.caisseService = caisseService;
-        this.consomationService = consomationService;
     }
 
     public Person insertPersonData(Person person) {
@@ -64,6 +61,7 @@ public class PersonService {
             e.printStackTrace();
         }
     }
+
 
 
 }

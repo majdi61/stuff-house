@@ -68,6 +68,14 @@ public class ConsomationService {
         return consomationRepository.findAll();
     }
 
+    public Consomation updateConsomationsIfPaid(Consomation consomation) {
+        return consomationRepository.save(consomation);
+    }
+
+
+    public List<Consomation> getConsomationsByCode(String code) {
+        return consomationRepository.findConsomationsByCode(code);
+    }
 
     public Optional<Consomation> getConsomationInformationById(String id) {
         return consomationRepository.findById(id);
