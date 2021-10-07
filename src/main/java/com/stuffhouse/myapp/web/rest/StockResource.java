@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -41,6 +42,13 @@ public class StockResource {
     public Page<Stock> getVisitsPage(@Filter(entityClass = Stock.class) Document document, Pageable pageable) {
         return stockService.getStocksPage(document, pageable);
     }
+
+    @CrossOrigin("https://stuffhouse.web.app/stock/list")
+    @GetMapping("")
+    public List<Stock> getVisitsPage() {
+        return stockService.getStocksList();
+    }
+
     @CrossOrigin("https://stuffhouse.web.app/stock")
     @GetMapping(path = "{id}")
     public Optional<Stock> readQueryUsingId(@PathVariable("id") String id) {
