@@ -37,7 +37,7 @@ public class PersonResource {
     public void update(@PathVariable String id, @RequestBody Person person) {
         personService.updatePersonUsingId(id, person);
     }
-    @PutMapping(path = "/payCredit")
+    @PutMapping(path = "/paycredit")
     public void payCredit( @RequestBody String code) {
         personService.updatePersonCreditIfPayCredit(code);
     }
