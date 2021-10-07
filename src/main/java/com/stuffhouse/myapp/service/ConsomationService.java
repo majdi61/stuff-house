@@ -1,6 +1,7 @@
 package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Article;
+import com.stuffhouse.myapp.domain.Caisse;
 import com.stuffhouse.myapp.domain.Compteur;
 import com.stuffhouse.myapp.domain.Consomation;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
@@ -8,6 +9,7 @@ import com.stuffhouse.myapp.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -57,13 +59,23 @@ public class ConsomationService {
             .person(personService.getPersonByCode(consomation.getCode()))
             .paid(consomation.getPaid())
             .valueToPay(ValueToPayCalcul)
+            .code(consomation.getCode())
             .build();
 
         return consomationRepository.insert(consomationfinal);
     }
 
+    public Consomation updateConsomationIfPaid(Consomation consomation) {
+        return consomationRepository.save(consomation);
+    }
+
+
     public Collection<Consomation> getAllConsomationInformation() {
         return consomationRepository.findAll();
+    }
+
+    public List<Consomation> getConsomationsByCode(String code) {
+        return consomationRepository.findConsomationsByCode(code);
     }
 
     public Optional<Consomation> getConsomationInformationById(String id) {
