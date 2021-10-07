@@ -2,6 +2,7 @@ package com.stuffhouse.myapp.service;
 
 import com.stuffhouse.myapp.domain.Compteur;
 import com.stuffhouse.myapp.domain.Consomation;
+import com.stuffhouse.myapp.domain.Expenses;
 import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
 import com.stuffhouse.myapp.repository.PersonRepository;
@@ -43,12 +44,22 @@ public class ConsomationService {
 
         } else {
 
-            Person person = consomation.getPerson();
-            person.setCredit(person.getCredit() + consomation.getValueToPay());
-            personService.insertPersonData(person);
+
+            Person personUpdate = Person.builder()
+                .id(consomation.getPerson().getId())
+                .credit(consomation.getQuantity()*consomation.getArticle().getPrix())
+                .build();
+
+            personService.insertPersonData(personUpdate);
         }
 
-        return consomationRepository.insert(consomation);
+        Consomation consomationfinal = Consomation.builder()
+            .article(consomation.getArticle())
+            .quantity(consomation.getQuantity())
+            .person(consomation.getPerson())
+            .paid(consomation.getPaid())
+            .build();
+        return consomationRepository.insert(consomationfinal);
     }
 
     public Collection<Consomation> getAllConsomationInformation() {
