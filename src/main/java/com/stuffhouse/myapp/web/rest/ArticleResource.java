@@ -41,6 +41,7 @@ public class ArticleResource {
     public void delete(@PathVariable("id") String id) {
         articleService.deleteArticleUsingId(id);
     }
+
     @CrossOrigin("https://stuffhouse.web.app/article")
     @GetMapping("")
     public Page<Article> getArticlesPage(@Filter(entityClass = Article.class) Document document, Pageable pageable) {

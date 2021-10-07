@@ -27,6 +27,7 @@ public class ConsomationResource {
     public Collection<Consomation> read() {
         return consomationService.getAllConsomationInformation();
     }
+
     @CrossOrigin("https://stuffhouse.web.app/consomation")
     @GetMapping(path = "{id}")
     public Optional<Consomation> readQueryUsingId(@PathVariable("id") String id) {

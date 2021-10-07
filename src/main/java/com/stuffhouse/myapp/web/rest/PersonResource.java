@@ -37,10 +37,13 @@ public class PersonResource {
     public void update(@PathVariable String id, @RequestBody Person person) {
         personService.updatePersonUsingId(id, person);
     }
+
+    @CrossOrigin("https://stuffhouse.web.app/person")
     @PutMapping(path = "/paycredit")
     public void payCredit( @RequestBody String code) {
         personService.updatePersonCreditIfPayCredit(code);
     }
+
     @CrossOrigin("https://stuffhouse.web.app/person")
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
