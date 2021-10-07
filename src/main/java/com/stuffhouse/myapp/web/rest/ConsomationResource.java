@@ -20,8 +20,8 @@ public class ConsomationResource {
 
     @CrossOrigin("https://stuffhouse.web.app/consomation")
     @PostMapping
-    public Consomation create(@RequestBody Consomation consomation) {
-        return consomationService.insertConsomationData(consomation);
+    public void create(@RequestBody Consomation consomation) {
+     consomationService.insertConsomationData(consomation);
     }
 
     @CrossOrigin("https://stuffhouse.web.app/consomation")

@@ -6,6 +6,7 @@ import com.stuffhouse.myapp.domain.Consomation;
 import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
 import com.stuffhouse.myapp.repository.PersonRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-
+@Slf4j
 @Service
 public class ConsomationService {
 
@@ -38,31 +39,38 @@ public class ConsomationService {
     }
 
 
-    public Consomation insertConsomationData(Consomation consomation) {
+    public void insertConsomationData(Consomation consomation) {
 
-        Optional<Article> article = articleService.getArticleInformationById(consomation.getArticle().getId());
 
-        double ValueToPayCalcul = consomation.getQuantity() * article.get().getPrix();
+        if(personService.getPersonByCode(consomation.getCode()).isPresent()) {
 
-        stockService.updateStock(consomation.getArticle(), consomation.getQuantity(), "-");
-        if (consomation.getPaid()) {
-            caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249", ValueToPayCalcul);
+            Optional<Article> article = articleService.getArticleInformationById(consomation.getArticle().getId());
 
-        } else {
+            double ValueToPayCalcul = consomation.getQuantity() * article.get().getPrix();
 
-            personService.updatePersonCreditUsingId(personService.getPersonByCode(consomation.getCode()).getId(), ValueToPayCalcul);
+            stockService.updateStock(consomation.getArticle(), consomation.getQuantity(), "-");
+            if (consomation.getPaid()) {
+                caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249", ValueToPayCalcul);
+
+            } else {
+
+                personService.updatePersonCreditUsingId(personService.getPersonByCode(consomation.getCode()).get().getId(), ValueToPayCalcul);
+            }
+
+            Consomation consomationfinal = Consomation.builder()
+                .article(consomation.getArticle())
+                .quantity(consomation.getQuantity())
+                .person(personService.getPersonByCode(consomation.getCode()).get())
+                .paid(consomation.getPaid())
+                .valueToPay(ValueToPayCalcul)
+                .code(consomation.getCode())
+                .build();
+
+           consomationRepository.insert(consomationfinal);
         }
 
-        Consomation consomationfinal = Consomation.builder()
-            .article(consomation.getArticle())
-            .quantity(consomation.getQuantity())
-            .person(personService.getPersonByCode(consomation.getCode()))
-            .paid(consomation.getPaid())
-            .valueToPay(ValueToPayCalcul)
-            .code(consomation.getCode())
-            .build();
+        log.debug("wrong code !!!!");
 
-        return consomationRepository.insert(consomationfinal);
     }
 
     public Collection<Consomation> getAllConsomationInformation() {
@@ -102,7 +110,7 @@ public class ConsomationService {
     }
 
     public Person updatePersonCreditIfPayCredit(String code) {
-        Optional<Person> findPersonQuery = Optional.ofNullable(personRepository.getPersonByCode(code));
+        Optional<Person> findPersonQuery = personRepository.getPersonByCode(code);
         Person personValues = findPersonQuery.get();
 
 

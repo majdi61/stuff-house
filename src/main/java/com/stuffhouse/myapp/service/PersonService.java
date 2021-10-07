@@ -29,7 +29,7 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
-    public Person getPersonByCode(String code) {
+    public Optional<Person> getPersonByCode(String code) {
         return personRepository.getPersonByCode(code);
     }
 
