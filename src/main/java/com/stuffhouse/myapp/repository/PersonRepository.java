@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonRepository extends MongoRepository<Person, String> {
 
+    Person getPersonByCode(String code);
+
 }

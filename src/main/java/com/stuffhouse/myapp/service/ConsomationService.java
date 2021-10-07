@@ -37,20 +37,15 @@ public class ConsomationService {
 
     public Consomation insertConsomationData(Consomation consomation) {
 
+        double ValueToPayCalcul= consomation.getQuantity()*consomation.getArticle().getPrix();
+
         stockService.updateStock(consomation.getArticle(), consomation.getQuantity(), "-");
         if (consomation.getPaid()) {
             caisseService.updateCaisseUsingId("615e3266d5f0b54a6ba4a249", consomation.getValueToPay(), "+");
 
-
         } else {
 
-
-            Person personUpdate = Person.builder()
-                .id(consomation.getPerson().getId())
-                .credit(consomation.getQuantity()*consomation.getArticle().getPrix())
-                .build();
-
-            personService.insertPersonData(personUpdate);
+                personService.updatePersonCreditUsingId(consomation.getPerson().getId(),ValueToPayCalcul);
         }
 
         Consomation consomationfinal = Consomation.builder()
@@ -58,8 +53,9 @@ public class ConsomationService {
             .quantity(consomation.getQuantity())
             .person(consomation.getPerson())
             .paid(consomation.getPaid())
-            .valueToPay(consomation.getQuantity()*consomation.getArticle().getPrix())
+            .valueToPay(ValueToPayCalcul)
             .build();
+
         return consomationRepository.insert(consomationfinal);
     }
 

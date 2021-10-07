@@ -39,6 +39,13 @@ public class PersonService {
         return personRepository.save(personValues);
     }
 
+    public Person updatePersonCreditUsingId(String id, double credit) {
+        Optional<Person> findPersonQuery = personRepository.findById(id);
+        Person personValues = findPersonQuery.get();
+        personValues.setCredit(personValues.getCredit()+credit);
+        return personRepository.save(personValues);
+    }
+
     public void deletePersonUsingId(String id) {
         try {
             personRepository.deleteById(id);
