@@ -1,9 +1,6 @@
 package com.stuffhouse.myapp.service;
 
-import com.stuffhouse.myapp.domain.Compteur;
-import com.stuffhouse.myapp.domain.Consomation;
-import com.stuffhouse.myapp.domain.Expenses;
-import com.stuffhouse.myapp.domain.Person;
+import com.stuffhouse.myapp.domain.*;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
 import com.stuffhouse.myapp.repository.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -21,9 +18,10 @@ public class ConsomationService {
     private final StockService stockService;
     private final CaisseService caisseService;
     private final PersonService personService;
+    private final ArticleService articleService;
 
 
-    public ConsomationService(ConsomationRepository consomationRepository, PersonRepository personRepository, StockService stockService, CaisseService caisseService, PersonService personService) {
+    public ConsomationService(ConsomationRepository consomationRepository, PersonRepository personRepository, StockService stockService, CaisseService caisseService, PersonService personService, ArticleService articleService) {
         this.consomationRepository = consomationRepository;
         this.personRepository = personRepository;
 
@@ -32,12 +30,15 @@ public class ConsomationService {
 
         this.caisseService = caisseService;
         this.personService = personService;
+        this.articleService = articleService;
     }
 
 
     public Consomation insertConsomationData(Consomation consomation) {
 
-        double ValueToPayCalcul= consomation.getQuantity()*consomation.getArticle().getPrix();
+        Optional<Article> article = articleService.getArticleInformationById(consomation.getArticle().getId());
+
+        double ValueToPayCalcul= consomation.getQuantity()*article.get().getPrix();
 
         stockService.updateStock(consomation.getArticle(), consomation.getQuantity(), "-");
         if (consomation.getPaid()) {
