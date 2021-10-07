@@ -64,22 +64,4 @@ public class PersonService {
         }
     }
 
-
-    public Person updatePersonCreditIfPayCredit(String code) {
-        Optional<Person> findPersonQuery = Optional.ofNullable(personRepository.getPersonByCode(code));
-        Person personValues = findPersonQuery.get();
-
-
-        consomationService.getConsomationsByCode(personValues.getCode()).forEach(consomation -> {
-            if(!consomation.getPaid())
-                consomation.setPaid(true);
-            consomationService.updateConsomationIfPaid(consomation);
-
-
-        });
-        caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249",personValues.getCredit());
-        personValues.setCredit(0);
-        return personRepository.save(personValues);
-    }
-
 }
