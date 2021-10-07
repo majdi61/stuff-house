@@ -43,8 +43,8 @@ public class StockResource {
         return stockService.getStocksPage(document, pageable);
     }
 
-    @CrossOrigin("https://stuffhouse.web.app/stock/list")
-    @GetMapping("")
+    @CrossOrigin("https://stuffhouse.web.app/stock")
+    @GetMapping("/list")
     public List<Stock> getVisitsPage() {
         return stockService.getStocksList();
     }
