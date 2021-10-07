@@ -110,21 +110,25 @@ public class ConsomationService {
         return consomationRepository.findConsomationsByCode(code);
     }
 
-    public Person updatePersonCreditIfPayCredit(String code) {
-        Optional<Person> findPersonQuery = personRepository.getPersonByCode(code);
-        Person personValues = findPersonQuery.get();
+    public String updatePersonCreditIfPayCredit(String code) {
+        if(personService.getPersonByCode(code).isPresent()) {
+            Optional<Person> findPersonQuery = personRepository.getPersonByCode(code);
+            Person personValues = findPersonQuery.get();
 
 
-        getConsomationsByCode(personValues.getCode()).forEach(consomation -> {
-            if(!consomation.getPaid())
-                consomation.setPaid(true);
-           updateConsomationIfPaid(consomation);
+            getConsomationsByCode(personValues.getCode()).forEach(consomation -> {
+                if (!consomation.getPaid())
+                    consomation.setPaid(true);
+                updateConsomationIfPaid(consomation);
 
 
-        });
-        caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249",personValues.getCredit());
-        personValues.setCredit(0);
-        return personRepository.save(personValues);
+            });
+            caisseService.updateCaisseIfConsomationPaid("615e3266d5f0b54a6ba4a249", personValues.getCredit());
+            personValues.setCredit(0);
+            personRepository.save(personValues);
+            return "success";
+        }
+        return "error";
     }
 
 
