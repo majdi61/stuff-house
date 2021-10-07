@@ -1,11 +1,11 @@
 package com.stuffhouse.myapp.web.rest;
 
 import com.stuffhouse.myapp.domain.Consomation;
-import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.service.ConsomationService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @RestController
@@ -32,9 +32,10 @@ public class ConsomationResource {
 
     @CrossOrigin("https://stuffhouse.web.app/consomation")
     @GetMapping
-    public Collection<Consomation> read() {
-        return consomationService.getAllConsomationInformation();
+    public Page<Consomation> read(Pageable pageable) {
+        return consomationService.findConsomationsPage(pageable);
     }
+
     @CrossOrigin("https://stuffhouse.web.app/consomation")
     @GetMapping(path = "{id}")
     public Optional<Consomation> readQueryUsingId(@PathVariable("id") String id) {

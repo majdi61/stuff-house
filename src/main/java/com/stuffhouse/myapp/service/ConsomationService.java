@@ -7,6 +7,8 @@ import com.stuffhouse.myapp.domain.Person;
 import com.stuffhouse.myapp.repository.ConsomationRepository;
 import com.stuffhouse.myapp.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -74,8 +76,8 @@ public class ConsomationService {
 
     }
 
-    public Collection<Consomation> getAllConsomationInformation() {
-        return consomationRepository.findAll();
+    public Page<Consomation> findConsomationsPage(Pageable pageable) {
+        return consomationRepository.findConsomationsPage(pageable);
     }
 
     public Optional<Consomation> getConsomationInformationById(String id) {
