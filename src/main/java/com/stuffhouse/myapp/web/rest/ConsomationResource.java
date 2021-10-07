@@ -25,7 +25,7 @@ public class ConsomationResource {
     }
 
     @CrossOrigin("https://stuffhouse.web.app/consomation")
-    @PostMapping
+    @PostMapping("/paycredit")
     public Person payCredit(@RequestBody String code) {
         return consomationService.updatePersonCreditIfPayCredit(code);
     }
