@@ -27,7 +27,7 @@ public class StockResource {
     public Stock create(@RequestBody Stock stock) {
         return stockService.insertStockData(stock);
     }
-    @CrossOrigin("https://stuffhouse.web.app/stock")
+    @CrossOrigin("https://stuffhouse.web.app/stock/addstock")
     @PostMapping("/addstock")
     public Stock addStock(@RequestBody Stock stock) {
         return stockService.addStock(stock);
