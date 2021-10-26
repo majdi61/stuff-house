@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +23,9 @@ public class Expenses {
     private long quantity;
     private String description;
     private long cost;
+
+    @Builder.Default
+    private Instant time = Instant.now();
 
 
 }
