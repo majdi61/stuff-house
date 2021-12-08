@@ -44,7 +44,7 @@ public class ConsomationService {
     public String insertConsomationData(Consomation consomation) {
 
 
-        if(personService.getPersonByCode(consomation.getCode()).isPresent() && consomation.getQuantity()<stockService.getStockByType(consomation.getArticle()).getQuantity()) {
+        if(personService.getPersonByCode(consomation.getCode()).isPresent() && consomation.getQuantity()<=stockService.getStockByType(consomation.getArticle()).getQuantity()) {
 
             Optional<Article> article = articleService.getArticleInformationById(consomation.getArticle().getId());
 
