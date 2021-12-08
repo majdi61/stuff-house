@@ -26,7 +26,7 @@ public class Stock {
     private Article article;
     private long quantity;
 
-    private long cost;
+    private double cost;
 
     private String type;
 
