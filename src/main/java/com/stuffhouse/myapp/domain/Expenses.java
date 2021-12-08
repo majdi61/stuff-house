@@ -22,7 +22,7 @@ public class Expenses {
     private String type;
     private long quantity;
     private String description;
-    private long cost;
+    private double cost;
 
     @Builder.Default
     private Instant time = Instant.now();

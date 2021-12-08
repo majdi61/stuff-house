@@ -49,15 +49,15 @@ public class ExpensesService {
     }
 
 
-    public long getExpensesCount() {
+    public double getExpensesCount() {
         Compteur c= new Compteur();
         expensesRepository.findAll().forEach(a->{
-            c.setX(c.getX()+a.getCost());
+            c.setD(c.getD()+a.getCost());
 
 
 
         });
-        return  c.getX();
+        return  c.getD();
 
     }
 
@@ -72,7 +72,7 @@ public class ExpensesService {
         });
 
         expensesRepository.findAll().forEach(a->{
-            c.setX(c.getX()+a.getCost());
+            c.setD(c.getX()+a.getCost());
 
 
 
