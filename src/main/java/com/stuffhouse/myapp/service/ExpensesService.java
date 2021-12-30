@@ -64,20 +64,17 @@ public class ExpensesService {
     public double getProfits() {
 
         Compteur c= new Compteur();
-        consomationRepository.findConsomationsByPaid("true").forEach(a->{
+        consomationRepository.findConsomationsByPaidIsTrue().forEach(a->{
             c.setD(c.getD()+a.getValueToPay());
-
-
 
         });
 
         expensesRepository.findAll().forEach(a->{
             c.setS(c.getS()+a.getCost());
 
-
-
         });
-
+log.debug(String.valueOf(c.getD()));
+log.debug(String.valueOf(c.getS()));
 
 
         return c.getD()-c.getS();
