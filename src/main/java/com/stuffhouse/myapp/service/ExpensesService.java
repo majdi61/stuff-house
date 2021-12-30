@@ -64,7 +64,7 @@ public class ExpensesService {
     public double getProfits() {
 
         Compteur c= new Compteur();
-        consomationRepository.findAll().forEach(a->{
+        consomationRepository.findConsomationsByPaid().forEach(a->{
             c.setD(c.getD()+a.getValueToPay());
 
 
@@ -72,7 +72,7 @@ public class ExpensesService {
         });
 
         expensesRepository.findAll().forEach(a->{
-            c.setD(c.getX()+a.getCost());
+            c.setS(c.getS()+a.getCost());
 
 
 
@@ -80,6 +80,6 @@ public class ExpensesService {
 
 
 
-        return c.getD()-c.getX();
+        return c.getD()-c.getS();
     }
 }

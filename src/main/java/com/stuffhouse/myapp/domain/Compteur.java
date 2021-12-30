@@ -19,5 +19,8 @@ public class Compteur {
     @Builder.Default()
     private double d=0;
 
+    @Builder.Default()
+    private double s=0;
+
 
 }
