@@ -64,7 +64,7 @@ public class ExpensesService {
     public double getProfits() {
 
         Compteur c= new Compteur();
-        consomationRepository.findConsomationsByPaid().forEach(a->{
+        consomationRepository.findConsomationsByPaid("true").forEach(a->{
             c.setD(c.getD()+a.getValueToPay());
 
 
