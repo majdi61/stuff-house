@@ -1,5 +1,6 @@
 package com.stuffhouse.myapp.domain;
 
+import com.stuffhouse.myapp.service.dto.Horaire;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,14 @@ public class Mark {
     private String latitude;
 
     private String longitude;
+
+    private String coverImage;
+
+    private String phoneNumber;
+
+    private String fbLink;
+
+    private Horaire horaire;
 
     private String tags;
 
