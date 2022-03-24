@@ -50,6 +50,6 @@ public class Mark {
 
     private String shortDescription;
 
-    private List<String> photos = Lists.newArrayList();
+    private List<Object> photos = Lists.newArrayList();
 
 }
