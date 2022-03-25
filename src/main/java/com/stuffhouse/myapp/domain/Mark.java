@@ -1,6 +1,7 @@
 package com.stuffhouse.myapp.domain;
 
 import com.stuffhouse.myapp.service.dto.Horaire;
+import com.stuffhouse.myapp.service.dto.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,5 +52,7 @@ public class Mark {
     private String shortDescription;
 
     private List<Object> photos = Lists.newArrayList();
+
+    private List<Review> reviewList = Lists.newArrayList();
 
 }

@@ -4,6 +4,7 @@ package com.stuffhouse.myapp.service;
 import com.stuffhouse.myapp.client.RemoteClient;
 import com.stuffhouse.myapp.domain.Mark;
 import com.stuffhouse.myapp.repository.MarkRepository;
+import com.stuffhouse.myapp.service.dto.Review;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -30,6 +32,17 @@ public class MarkService {
 
     public Mark saveMark(Mark mark) {
         return markRepository.save(mark);
+    }
+
+
+    public Mark addReview(String id, Review review) {
+
+        Optional<Mark> mark = Optional.of(getMarkById(id).get());
+        Mark markx = mark.get();
+        List<Review> listReview = markx.getReviewList();
+        listReview.add(review);
+        markx.setReviewList(listReview);
+        return markRepository.save(markx);
     }
 
     public Page<Mark> getMarksPage(Document document, Pageable pageable) {
