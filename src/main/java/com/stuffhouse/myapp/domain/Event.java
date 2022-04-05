@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.Instant;
+import java.util.Date;
 
 @Document(collection = "event")
 @Data
@@ -33,8 +33,8 @@ public class Event {
 
     private String img;
 
-    private Instant date;
+    private Date date;
 
-    private double price;
+    private String price;
 
 }
