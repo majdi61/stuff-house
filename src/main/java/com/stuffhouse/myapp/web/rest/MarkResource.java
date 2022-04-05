@@ -2,6 +2,7 @@ package com.stuffhouse.myapp.web.rest;
 
 import com.stuffhouse.myapp.domain.Mark;
 import com.stuffhouse.myapp.service.MarkService;
+import com.stuffhouse.myapp.service.dto.Review;
 import com.turkraft.springfilter.boot.Filter;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,12 @@ public class MarkResource {
     @PostMapping(path = "")
     public ResponseEntity<Mark> saveMark(@RequestBody Mark mark) {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(markService.saveMark(mark)));
+    }
+
+    @CrossOrigin(origins = "https://coart-doura.web.app/home")
+    @PostMapping(path = "/review/{id}")
+    public ResponseEntity<Mark> addReview(@PathVariable String id,@RequestBody Review review) {
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(markService.addReview(id,review)));
     }
 
     @CrossOrigin(origins = "https://coart-doura.web.app/home")
