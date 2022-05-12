@@ -24,7 +24,7 @@ public class EventService {
 
     }
 
-    //testtt
+    //testttttt
     public Event saveEvent(Event event) {
         return eventRepository.save(event);
     }
