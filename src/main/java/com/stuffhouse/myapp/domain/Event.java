@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import org.springframework.data.annotation.Transient;
 import java.util.Date;
 
 @Document(collection = "event")
@@ -18,6 +19,8 @@ import java.util.Date;
 @Builder(toBuilder = true)
 public class Event {
 
+    @Transient
+    public static final String SEQUENCE_NAME_UIID = "event_sequence_uiid";
     @Id
     private String id;
 
