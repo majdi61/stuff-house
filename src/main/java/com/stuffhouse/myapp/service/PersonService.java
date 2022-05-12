@@ -29,6 +29,10 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
+    public Optional<Person> getPersonByCode(String code) {
+        return personRepository.getPersonByCode(code);
+    }
+
     public Person updatePersonUsingId(String id, Person person) {
         Optional<Person> findPersonQuery = personRepository.findById(id);
         Person personValues = findPersonQuery.get();
@@ -36,6 +40,13 @@ public class PersonService {
         personValues.setLastName(person.getLastName());
         personValues.setCode(person.getCode());
         personValues.setFirstName(person.getFirstName());
+        return personRepository.save(personValues);
+    }
+
+    public Person updatePersonCreditUsingId(String id, double credit) {
+        Optional<Person> findPersonQuery = personRepository.findById(id);
+        Person personValues = findPersonQuery.get();
+        personValues.setCredit(personValues.getCredit()+credit);
         return personRepository.save(personValues);
     }
 

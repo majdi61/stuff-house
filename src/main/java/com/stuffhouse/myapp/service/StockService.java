@@ -37,8 +37,8 @@ public class StockService {
         return stockRepository.save(Stock);
     }
 
-    public Stock updateStock(Article aricle, long quantity, String op) {
-        Stock oldStock = stockRepository.findStockByArticle(aricle);
+    public Stock updateStock(Article article, long quantity, String op) {
+        Stock oldStock = stockRepository.findStockByArticle(article);
 
         switch (op) {
             case "+":
@@ -57,6 +57,14 @@ public class StockService {
 
     public Page<Stock> getStocksPage(Document document, Pageable pageable) {
         return stockRepository.filter(Optional.ofNullable(document).orElse(new Document()), pageable);
+    }
+
+    public List<Stock> getStocksList() {
+        return stockRepository.findAll();
+    }
+
+    public Stock getStockByType(Article article) {
+        return stockRepository.findStockByArticle(article);
     }
 
     public long getStocksByType(String type, Pageable pageable) {

@@ -21,7 +21,7 @@ public class ExpensesResource {
         this.expensesService = expensesService;
     }
 
-
+    @CrossOrigin("https://stuffhouse.web.app/expenses")
     @PostMapping
     public Expenses create(@RequestBody Expenses expenses) {
         return expensesService.insertExpensesData(expenses);
@@ -32,26 +32,31 @@ public class ExpensesResource {
      * return expensesService.getAllExpensesInformation();
      * }
      */
+    @CrossOrigin("https://stuffhouse.web.app/expenses")
     @GetMapping(path = "{id}")
     public Optional<Expenses> readQueryUsingId(@PathVariable("id") String id) {
         return expensesService.getExpensesInformationById(id);
     }
 
+    @CrossOrigin("https://stuffhouse.web.app/expenses")
     @GetMapping("/allexpenses")
     public double getStockCountByType() {
         return expensesService.getExpensesCount();
     }
 
+    @CrossOrigin("https://stuffhouse.web.app/expenses")
     @GetMapping("/profits")
     public double getProfits() {
         return expensesService.getProfits();
     }
 
+    @CrossOrigin("https://stuffhouse.web.app/expenses")
     @DeleteMapping(path = "/delete/{id}")
     public void delete(@PathVariable("id") String id) {
         expensesService.deleteExpensesUsingId(id);
     }
 
+    @CrossOrigin("https://stuffhouse.web.app/expenses")
     @GetMapping("")
     public Page<Expenses> getExpensesPage(@Filter(entityClass = Expenses.class) Document document, Pageable pageable) {
         return expensesService.getExpensesPage(document, pageable);

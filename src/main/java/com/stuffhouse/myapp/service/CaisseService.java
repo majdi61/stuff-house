@@ -30,25 +30,36 @@ public class CaisseService {
     }
 
     public Caisse updateCaisseUsingId(String id,double amount, String op) {
-        Optional<Caisse> findCaisseQuery = caisseRepository.findById(id);
-        Caisse oldCaisse = caisseRepository.findById(id).get();
+        Optional<Caisse> findCaisseQuery = Optional.ofNullable(caisseRepository.findCaisseById(id));
+        Caisse caisseValues = findCaisseQuery.get();
 
-        double caisseOldValue = findCaisseQuery.get().getValeur();
+        double caisseOldValue = caisseValues.getValeur();
 
 
         switch (op) {
             case "+":
-                oldCaisse.setValeur(caisseOldValue + amount);
+                caisseValues.setValeur(caisseOldValue + amount);
                 break;
             case "-":
-                oldCaisse.setValeur(caisseOldValue - amount);
+                caisseValues.setValeur(caisseOldValue - amount);
                 break;
 
         }
 
 
-        return caisseRepository.save(oldCaisse);
+        return caisseRepository.save(caisseValues);
     }
+    public void updateCaisseIfConsomationPaid(String id,double amount) {
+
+
+
+        caisseRepository.findById(id).ifPresent(caisse -> {
+            caisse.setValeur(caisse.getValeur()+amount);
+            caisseRepository.save(caisse);
+        });
+    }
+
+
 
 
     public void deleteCaisseUsingId(String id) {

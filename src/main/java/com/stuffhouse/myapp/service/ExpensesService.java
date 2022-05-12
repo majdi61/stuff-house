@@ -49,37 +49,34 @@ public class ExpensesService {
     }
 
 
-    public long getExpensesCount() {
+    public double getExpensesCount() {
         Compteur c= new Compteur();
         expensesRepository.findAll().forEach(a->{
-            c.setX(c.getX()+a.getCost());
+            c.setD(c.getD()+a.getCost());
 
 
 
         });
-        return  c.getX();
+        return  c.getD();
 
     }
 
     public double getProfits() {
 
         Compteur c= new Compteur();
-        consomationRepository.findAll().forEach(a->{
+        consomationRepository.findConsomationsByPaidIsTrue().forEach(a->{
             c.setD(c.getD()+a.getValueToPay());
-
-
 
         });
 
         expensesRepository.findAll().forEach(a->{
-            c.setX(c.getX()+a.getCost());
-
-
+            c.setS(c.getS()+a.getCost());
 
         });
+log.debug(String.valueOf(c.getD()));
+log.debug(String.valueOf(c.getS()));
 
 
-
-        return c.getD()-c.getX();
+        return c.getD()-c.getS();
     }
 }

@@ -24,15 +24,14 @@ public class Consomation {
     @DBRef
     private Article article;
 
+    private String code;
     private long quantity;
 
-    private double valueToPay;
+    private double valueToPay ;
     private Boolean paid;
 
 
     @Builder.Default
     private Instant time = Instant.now();
 
-    public Consomation(Person person, Article article, Boolean paid) {
-    }
 }
