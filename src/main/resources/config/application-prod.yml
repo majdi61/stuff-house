@@ -82,7 +82,7 @@ server:
 
 jhipster:
   cors:
-    allowed-origins: "*"
+    allowed-origins: "https://stuffhouse.web.app,https://coart-doura.web.app,http://localhost:4200/,http://localhost:3001/,https://admin-coart-doura.web.app/"
     allowed-methods: "*"
     allowed-headers: "*"
     exposed-headers: "Authorization,Link,X-Total-Count"
